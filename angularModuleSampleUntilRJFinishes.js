@@ -30,9 +30,18 @@ angular.module("Compare",  ['ui.router'])
 
     function functionName($rootScope,$scope, $http ){
         console.log("Hello");
-
+        var googleApiKey = "AIzaSyAV9gLZMExE7Y71Zb_Cfpj_GUlsHA0hFIc";
+        var queryString = "power";
         function fetch() {
-        $http.get(" http://data.colorado.gov/resource/4ykn-tg5h.json")
+
+            // " http://data.colorado.gov/resource/4ykn-tg5h.json" get data from colorado
+           
+            /*
+                An example of searching with an image, I still neead to add the query after q=
+            "https://cse.google.com:443/cse/v1?key=" + googleApiKey + "&cx=011064704289244729545:_kjaxoek5uy&searchType=image&start=41&imgType=photo&q="
+            
+            */
+        $http.get("https://cse.google.com:443/cse/v1?key=" + googleApiKey + "&cx=011064704289244729545:_kjaxoek5uy&searchType=image&start=41&imgType=photo&q=")
           .then(function (response) {
                 console.log("success");
               console.log("response", response);
@@ -40,9 +49,9 @@ angular.module("Compare",  ['ui.router'])
               $scope.details = response;
               $scope.data1 = response.data;
               $scope.fullData = [];
-              for (var i = 0; i < response.data.length; i++) {
-                $scope.fullData.push(response.data[i].agentfirstname + " " + response.data[i].agentlastname + " is the principal agent for the coporation " + response.data[i].entityname + ". This corporation is located in Colorado. The address of the corporation in question is " + response.data[i].principaladdress1+ ", Colorado, United States. The Zip code of which is " + response.data[i].principalzipcode + ".");
-              }
+              // for (var i = 0; i < response.data.length; i++) {
+              //   // $scope.fullData.push(response.data[i].agentfirstname + " " + response.data[i].agentlastname + " is the principal agent for the coporation " + response.data[i].entityname + ". This corporation is located in Colorado. The address of the corporation in question is " + response.data[i].principaladdress1+ ", Colorado, United States. The Zip code of which is " + response.data[i].principalzipcode + ".");
+              // }
             console.log("data1", response.data.length);
             console.log("data1", $scope.data1);
           }, function(error){
